@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { Stack } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { useState } from "react";
+import SignInForm from "./components/SignInForm";
+import Dashboard from "./components/Dashboard";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [userid, setUserid] = useState(null);
+
+	return isLoggedIn ? (
+		<Stack maw={"75vw"} mah={"95vh"} w={"100%"} h={"100%"}>
+			<Dashboard userid={userid} />
+		</Stack>
+	) : (
+		<Stack maw={"75vw"} mah={"95vh"} w={"100%"} h={"100%"}>
+			<SignInForm
+				setIsLoggedIn={setIsLoggedIn}
+				setUserid={setUserid}
+			/>
+			<div style={{ display: "flex", justifyContent: "center" }}>
+				<a href="/">New Registration?</a>
+			</div>
+		</Stack>
+	);
 }
-
-export default App;
